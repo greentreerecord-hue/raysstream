@@ -1,10 +1,12 @@
 import { Queue } from "bullmq";
 
 const connection = {
-  url: process.env.REDIS_URL,
-};
+  connection: {
+    url: process.env.REDIS_URL!,
+  },
+}; 
 
-export const mediaQueue = new Queue("media", { connection });
+export const mediaQueue = new Queue("media", connection); 
 
 export async function enqueueTranscodeJob(payload: { videoId: string; sourceUrl: string }) {
   await mediaQueue.add("transcode-video", payload, {
