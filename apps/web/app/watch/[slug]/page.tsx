@@ -1,7 +1,7 @@
-import { notFound } from "next/navigation";
+export const dynamic = "force-dynamic"
 import { prisma } from "@raysstream/db";
 import { getCurrentUser } from "@/lib/auth";
-
+import { not found } from "next/navigation";
 export default async function WatchPage({ params }: any) {
   const slug = params.slug;
   const user = await getCurrentUser();
