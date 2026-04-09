@@ -8,7 +8,7 @@ export default async function HomePage() {
   const videos = await prisma.video.findMany({
     where: {
       status: "PUBLISHED",
-      OR: [{ visibility: "PUBLIC" }, ...(user ? [{ visibility: "PREMIUM" }] : [])]
+      OR: [{ visibility: "PUBLIC" as const }, ...(user ? [{ visibility: "PREMIUM" as const }] : [])]
     },
     include: { channel: true },
     orderBy: [{ publishedAt: "desc" }, { viewsCount: "desc" }],
