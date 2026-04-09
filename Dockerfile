@@ -1,9 +1,7 @@
 FROM node:18
 WORKDIR /app
-COPY . . 
+COPY . .
 RUN corepack enable
 RUN pnpm install
-RUN pnpm --filter@raysstream/web build 
-CMD
-("pnpm","--filter","@raysstream/web","start,
-")
+RUN pnpm --filter @raysstream/web build
+CMD ["pnpm","--filter","@raysstream/web","start"]
