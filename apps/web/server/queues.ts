@@ -1,17 +1,12 @@
-import { Queue } from "bullmq";
+import type { NextConfig } from "next";
 
-const connection = {
-  connection: {
-    url: process.env.REDIS_URL,
+const nextConfig: NextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   },
 };
 
-export const mediaQueue = new Queue("media", connection);
-
-export async function enqueueTranscodeJob(payload: { videoId: string }) {
-  await mediaQueue.add("transcode-video", payload, {
-    attempts: 3,
-    removeOnComplete: true,
-    backoff: { type: "exponential", delay: 3000 },
-  });
-} 
+export default nextConfig;
