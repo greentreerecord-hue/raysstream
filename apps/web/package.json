@@ -2,14 +2,12 @@
   "name": "@raysstream/web",
   "version": "0.0.1",
   "private": true,
-
   "scripts": {
     "dev": "next dev",
     "build": "pnpm --filter @raysstream/db prisma generate && next build",
     "start": "next start",
     "lint": "next lint"
   },
-
   "dependencies": {
     "@raysstream/db": "workspace:*",
     "bcryptjs": "^3.0.2",
@@ -24,12 +22,14 @@
     "tailwind-merge": "^3.3.0",
     "zod": "^3.24.2"
   },
-
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.2",
     "@types/node": "^22.5.10",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.9",
+    "tailwindcss": "^4.2.2",
     "typescript": "^5.9.3"
   }
-} 
- 
+}
