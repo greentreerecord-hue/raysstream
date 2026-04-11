@@ -13,10 +13,19 @@ model User {
   comments Comment[]
 }
 
+model Video {
+  id       String    @id @default(cuid())
+  title    String
+  url      String
+  comments Comment[]
+}
+
 model Comment {
   id       String @id @default(cuid())
   content  String
   videoId  String
   authorId String
-  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  video  Video @relation(fields: [videoId], references: [id])
+  author User  @relation(fields: [authorId], references: [id])
 } 
