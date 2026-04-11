@@ -1,7 +1,3 @@
-const nextConfig = {
-  experimental: {
-    serverComponentsExternalPackages: ["@prisma/client"]
-  }
-}
+const nextConfig = {}
 
-export default nextConfig  
+export default nextConfig 
