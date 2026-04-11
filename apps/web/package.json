@@ -4,32 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm --filter @raysstream/db prisma generate && next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "prisma generate --schema=./prisma/schema.prisma && next build",
+    "start": "next start"
   },
   "dependencies": {
-    "@raysstream/db": "workspace:*",
-    "bcryptjs": "^3.0.2",
-    "bullmq": "^5.73.4",
-    "clsx": "^2.1.1",
-    "hls.js": "^1.5.18",
-    "ioredis": "^5.10.1",
+    "@prisma/client": "^6.19.3",
     "next": "15.2.4",
+    "prisma": "^6.19.3",
     "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "stripe": "^18.0.0",
-    "tailwind-merge": "^3.3.0",
-    "zod": "^3.24.2"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4.2.2",
-    "@types/node": "^22.5.10",
-    "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.4",
-    "autoprefixer": "^10.4.27",
-    "postcss": "^8.5.9",
-    "tailwindcss": "^4.2.2",
-    "typescript": "^5.9.3"
+    "react-dom": "19.0.0"
   }
-}
+} 
