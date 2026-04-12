@@ -1,15 +1,8 @@
-export default function HomePage() {
+export default function Home() {
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        background: "black",
-        color: "white",
-        padding: "24px",
-      }}
-    >
-      <h1>Ray'sStream 🎬</h1>
-      <p>Live deployment test</p>
+    <main style={{ padding: 20 }}>
+      <h1>Ray'sStream 🚀</h1>
+      <p>Your app is live!</p>
     </main>
   );
 } 
