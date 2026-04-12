@@ -1,13 +1,37 @@
 import { NextResponse } from "next/server";
-import { signIn } from "@/lib/auth";
+import { prisma } from "@/prisma";
 
 export async function POST(req: Request) {
-  const { email, password } = await req.json();
-  const user = await signIn(email, password);
+  try {
+    const body = await req.json();
+    const { email } = body;
 
-  if (!user) {
-    return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+    if (!email) {
+      return NextResponse.json({ ok: false, error: "Email required" }, { status: 400 });
+    }
+
+    // find or create user
+    let user = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (!user) {
+      user = await prisma.user.create({
+        data: { email },
+      });
+    }
+
+    return NextResponse.json({
+      ok: true,
+      user: {
+        id: user.id,
+        email: user.email,
+      },
+    });
+  } catch (err) {
+    return NextResponse.json(
+      { ok: false, error: "Server error" },
+      { status: 500 }
+    );
   }
-
-  return NextResponse.json({ ok: true, user: { id: user.id, email: user.email, name: user.name } });
-}
+} 
