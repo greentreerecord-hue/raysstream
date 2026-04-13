@@ -1,22 +1,8 @@
 {
   "name": "raysstream",
   "private": true,
-  "version": "1.0.0",
-  "packageManager": "pnpm@9",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "install": "pnpm install --no-frozen-lockfile",
-    "postinstall": "prisma generate"
-  },
-  "dependencies": {
-    "next": "15.2.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "@prisma/client": "^6.0.0"
-  },
-  "devDependencies": {
-    "prisma": "^6.0.0"
+    "build": "pnpm install --no-frozen-lockfile && pnpm run build:app",
+    "build:app": "next build"
   }
-} 
+}  
