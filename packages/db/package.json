@@ -2,10 +2,12 @@
   "name": "raysstream",
   "private": true,
   "version": "1.0.0",
+  "packageManager": "pnpm@9",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "install": "pnpm install --no-frozen-lockfile",
     "postinstall": "prisma generate"
   },
   "dependencies": {
