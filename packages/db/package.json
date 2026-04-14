@@ -1,8 +1,6 @@
 {
-  "name": "raysstream",
+  "name": "@raysstream/db",
+  "version": "1.0.0",
   "private": true,
-  "scripts": {
-    "build": "pnpm install --no-frozen-lockfile && pnpm run build:app",
-    "build:app": "next build"
-  }
-}  
+  "main": "src/index.ts"
+} 
