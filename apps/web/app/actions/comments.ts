@@ -9,11 +9,11 @@ export async function createComment({
   videoId: string;
   body: string;
 }) {
-  return await prisma.comment.create({
+  return await (prisma as any).comment.create({
     data: {
       videoId,
       authorId: "temp-user",
-      content: body, // ✅ correct field
+      content: body,
     },
   });
 } 
