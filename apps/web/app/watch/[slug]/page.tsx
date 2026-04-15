@@ -4,13 +4,12 @@ import { prisma } from "@raysstream/db";
 import { getCurrentUser } from "@/lib/auth";
 import { notFound } from "next/navigation";
 
-export default async function WatchPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function WatchPage(props: any) {
   const user = await getCurrentUser();
-  const slug = params.slug;
+
+  const slug = props?.params?.slug;
+
+  if (!slug) notFound();
 
   const video = await prisma.video.findUnique({
     where: { slug },
@@ -54,5 +53,5 @@ export default async function WatchPage({
       </div>
     </main>
   );
-}
+} 
      
