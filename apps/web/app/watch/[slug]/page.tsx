@@ -4,13 +4,11 @@ import { prisma } from "@raysstream/db";
 import { getCurrentUser } from "@/lib/auth";
 import { notFound } from "next/navigation";
 
-type WatchPageProps = {
-  params: {
-    slug: string;
-  };
-};
-
-export default async function WatchPage({ params }: WatchPageProps) {
+export default async function WatchPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const user = await getCurrentUser();
   const slug = params.slug;
 
@@ -56,5 +54,5 @@ export default async function WatchPage({ params }: WatchPageProps) {
       </div>
     </main>
   );
-} 
-        
+}
+     
