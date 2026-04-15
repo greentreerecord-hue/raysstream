@@ -12,8 +12,8 @@ export async function createComment({
   return await prisma.comment.create({
     data: {
       videoId,
-      authorId: "temp-user", // TEMP FIX
-      content: body.trim(),
+      authorId: "temp-user",
+      content: body, // ✅ correct field
     },
   });
 } 
