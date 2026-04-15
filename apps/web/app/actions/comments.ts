@@ -1,24 +1,19 @@
 "use server";
 
-import { prisma } from "@/prisma";
-import { getCurrentUser } from "@/lib/auth";
-import { revalidatePath } from "next/cache";
+import { prisma } from "@raysstream/db";
 
-export async function createComment(videoId: string, body: string, slug?: string) {
-  const user = await getCurrentUser();
-
-  if (!user) throw new Error("Unauthorized");
-  if (!body.trim()) throw new Error("Comment cannot be empty");
-
-  await (prisma as any).comment.create({
+export async function createComment({
+  videoId,
+  body,
+}: {
+  videoId: string;
+  body: string;
+}) {
+  return await prisma.comment.create({
     data: {
       videoId,
-      authorId: user.id,
+      authorId: "temp-user", // TEMP FIX
       content: body.trim(),
     },
   });
-
-  if (slug) {
-    revalidatePath(`/watch/${slug}`);
-  }
 } 
