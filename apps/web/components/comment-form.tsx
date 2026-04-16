@@ -5,10 +5,9 @@ import { createComment } from "@/app/actions/comments";
 
 type Props = {
   videoId: string;
-  userId?: string;
 };
 
-export default function CommentForm({ videoId, userId = "user" }: Props) {
+export default function CommentForm({ videoId }: Props) {
   const [body, setBody] = useState("");
   const [error, setError] = useState("");
   const [isPending, startTransition] = useTransition();
@@ -22,7 +21,6 @@ export default function CommentForm({ videoId, userId = "user" }: Props) {
       try {
         await createComment({
           videoId: videoId,
-          userId: userId,
           body: body,
         });
 
