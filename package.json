@@ -9,8 +9,10 @@
     "start": "pnpm --filter web start"
   },
   "dependencies": {
+    "bullmq": "^5.74.1",
     "clsx": "^2.1.1",
     "hls.js": "^1.6.16",
+    "ioredis": "^5.10.1",
     "tailwind-merge": "^3.5.0"
   }
 }
