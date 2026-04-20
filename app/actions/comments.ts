@@ -1,19 +1,28 @@
 "use server";
 
-import { prisma } from "@raysstream/db";
+import { prisma } from "@/lib/prisma";
 
 export async function createComment({
   videoId,
-  body,
+  userId,
+  text,
 }: {
   videoId: string;
-  body: string;
+  userId: string;
+  text: string;
 }) {
-  return await (prisma as any).comment.create({
-    data: {
-      videoId,
-      authorId: "temp-user",
-      content: body,
-    },
-  });
+  try {
+    const comment = await prisma.comment.create({
+      data: {
+        videoId,
+        authorId: userId,
+        text,
+      },
+    });
+
+    return { success: true, comment };
+  } catch (error) {
+    console.error(error);
+    return { success: false };
+  }
 } 
