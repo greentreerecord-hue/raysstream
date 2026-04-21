@@ -1,18 +1,14 @@
 {
   "name": "raysstream",
   "private": true,
-  "version": "1.0.0",
-  "packageManager": "pnpm@10.0.0",
+  "packageManager": "npm@10",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "pnpm --filter web dev",
-    "build": "pnpm --filter web build",
-    "start": "pnpm --filter web start"
-  },
-  "dependencies": {
-    "bullmq": "^5.74.1",
-    "clsx": "^2.1.1",
-    "hls.js": "^1.6.16",
-    "ioredis": "^5.10.1",
-    "tailwind-merge": "^3.5.0"
+    "dev": "npm run dev --workspace web",
+    "build": "npm run build --workspace web",
+    "start": "npm run start --workspace web"
   }
-}
+} 
