@@ -1,11 +1,2 @@
 pnpm-workspace.yaml
-pnpm-lock.yaml
-node_modules
-.git
-.gitignore
-.env
-.env.local
-.env.development
-.env.production
-.next/cache
-dist 
+pnpm-lock.yaml 
