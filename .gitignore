@@ -8,4 +8,5 @@ dev.db
 out
 .vercel
 *.lnk 
-
+.turbo
+apps/worker/dist
