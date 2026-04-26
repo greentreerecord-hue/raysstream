@@ -1,4 +1,4 @@
 {
-  "installCommand": "npm install -g pnpm && pnpm install --config.fetch-timeout=100000",
-  "buildCommand": "pnpm --filter web build"
+  "installCommand": "npm install",
+  "buildCommand": "npm run build"
 } 
