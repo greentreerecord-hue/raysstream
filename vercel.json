@@ -1,4 +1,4 @@
 {
-  "installCommand": "cd packages/apps/web && npm install",
-  "buildCommand": "cd packages/apps/web && npm run build"
+  "installCommand": "npm install -g pnpm && pnpm install",
+  "buildCommand": "pnpm --filter web build"
 } 
