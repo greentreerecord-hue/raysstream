@@ -1,4 +1,4 @@
 {
-  "installCommand": "npm install -g pnpm && pnpm install",
+  "installCommand": "npm install -g pnpm && pnpm install --network-timeout 100000",
   "buildCommand": "pnpm --filter web build"
 } 
