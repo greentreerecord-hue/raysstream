@@ -1,14 +1,25 @@
-import { Worker } from "bullmq";
-import { transcodeVideo } from "./jobs/transcode";
+import { PrismaClient } from "@prisma/client";
 
-const connection = { url: process.env.REDIS_URL };
+const prisma = new PrismaClient();
 
-new Worker(
-  "video-queue",
-  async (job) => {
-    if (job.name === "transcode-video") {
-      await transcodeVideo((job.data as any).videoId);
+export async function transcodeVideo(videoId: string) {
+  console.log("Starting transcode for video:", videoId);
+
+  try {
+    const video = await prisma.video.findUnique({
+      where: {
+        id: videoId,
+      },
+    });
+
+    if (!video) {
+      console.log("Video not found:", videoId);
+      return;
     }
-  },
-  { connection }
-); 
+
+    console.log("Transcode finished for video:", videoId);
+  } catch (error) {
+    console.error("Transcode failed:", error);
+    throw error;
+  }
+} 
