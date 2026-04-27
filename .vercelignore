@@ -1,2 +1,2 @@
 pnpm-workspace.yaml
-pnpm-lock.yaml 
+pnpm-lock.yaml apps/worker 
