@@ -1,7 +1,5 @@
 "use server";
 
-import { prisma } from "@raysstream/db";
-
 export async function createComment({
   videoId,
   body,
@@ -9,11 +7,13 @@ export async function createComment({
   videoId: string;
   body: string;
 }) {
-  return await (prisma as any).comment.create({
-    data: {
-      videoId,
-      authorId: "temp-user",
-      content: body,
-    },
-  });
+  if (!videoId || !body) return null;
+
+  return null;
+}
+
+export async function getComments(videoId: string) {
+  if (!videoId) return [];
+
+  return [];
 } 

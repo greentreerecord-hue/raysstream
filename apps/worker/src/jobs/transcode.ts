@@ -1,44 +1,25 @@
-import { execa } from "execa";
-import path from "path";
-import fs from "fs/promises";
-import { prisma } from "@raysstream/db";
+import { PrismaClient } from "@prisma/client";
 
-export async function transcodeVideo(data: { videoId: string; sourceUrl: string }) {
-  const workingDir = path.join("/tmp", data.videoId);
-  await fs.mkdir(workingDir, { recursive: true });
+const prisma = new PrismaClient();
 
-  const outputManifest = path.join(workingDir, "index.m3u8");
+export async function transcodeVideo(videoId: string) {
+  console.log("Starting transcode for video:", videoId);
 
-  await execa(process.env.FFMPEG_PATH ?? "ffmpeg", [
-    "-i",
-    data.sourceUrl,
-    "-preset",
-    "veryfast",
-    "-g",
-    "48",
-    "-sc_threshold",
-    "0",
-    "-map",
-    "0:v:0",
-    "-map",
-    "0:a:0?",
-    "-f",
-    "hls",
-    "-hls_time",
-    "6",
-    "-hls_playlist_type",
-    "vod",
-    outputManifest,
-  ]);
+  try {
+    const video = await prisma.video.findUnique({
+      where: {
+        id: videoId,
+      },
+    });
 
-  const manifestUrl = `${process.env.CDN_BASE_URL}/videos/${data.videoId}/index.m3u8`;
+    if (!video) {
+      console.log("Video not found:", videoId);
+      return;
+    }
 
-  await prisma.video.update({
-    where: { id: data.videoId },
-    data: {
-      manifestUrl,
-      playbackUrl: manifestUrl,
-      status: "READY",
-    },
-  });
-}
+    console.log("Transcode finished for video:", videoId);
+  } catch (error) {
+    console.error("Transcode failed:", error);
+    throw error;
+  }
+} }
