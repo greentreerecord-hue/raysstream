@@ -11,7 +11,7 @@ export function CommentForm() {
     e.preventDefault();
 
     startTransition(async () => {
-      await createComment();
+      console.log("comment submitted");
       setBody("");
     });
   }
