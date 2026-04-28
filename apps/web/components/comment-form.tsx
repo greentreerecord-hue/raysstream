@@ -9,16 +9,12 @@ export function CommentForm({ videoId }: { videoId: string }) {
 
   const handleSubmit = () => {
     startTransition(async () => {
-      try {
-        await createComment({
-          videoId: videoId,
-          body: body,
-        });
+      await createComment({
+        videoId,
+        body,
+      });
 
-        setBody("");
-      } catch (err) {
-        console.error(err);
-      }
+      setBody("");
     });
   };
 
@@ -28,28 +24,9 @@ export function CommentForm({ videoId }: { videoId: string }) {
         value={body}
         onChange={(e) => setBody(e.target.value)}
         placeholder="Write a comment..."
-        style={{
-          width: "100%",
-          height: 80,
-          padding: 10,
-          borderRadius: 8,
-          border: "1px solid #ccc",
-        }}
       />
 
-      <button
-        onClick={handleSubmit}
-        disabled={isPending}
-        style={{
-          marginTop: 10,
-          padding: "10px 20px",
-          borderRadius: 8,
-          background: "black",
-          color: "white",
-          border: "none",
-          cursor: "pointer",
-        }}
-      >
+      <button onClick={handleSubmit} disabled={isPending}>
         {isPending ? "Posting..." : "Post Comment"}
       </button>
     </div>
