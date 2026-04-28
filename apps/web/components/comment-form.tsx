@@ -3,14 +3,22 @@
 import { useState, useTransition } from "react";
 import { createComment } from "../actions/comments";
 
-export function CommentForm() {
+export function CommentForm({ videoId }: { videoId: string }) {
   const [body, setBody] = useState("");
   const [isPending, startTransition] = useTransition();
 
   const handleSubmit = () => {
     startTransition(async () => {
-      await createComment({ body });
-      setBody("");
+      try {
+        await createComment({
+          videoId: videoId,
+          body: body,
+        });
+
+        setBody("");
+      } catch (err) {
+        console.error(err);
+      }
     });
   };
 
@@ -46,4 +54,4 @@ export function CommentForm() {
       </button>
     </div>
   );
-}  
+} 
