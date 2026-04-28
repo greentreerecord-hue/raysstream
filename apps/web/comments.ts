@@ -1,4 +1,3 @@
-export async function createComment(data: { body: string }) {
-  console.log("Comment:", data.body);
+async function createComment(data: { body: string }) {
   return { success: true };
 } 
