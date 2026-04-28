@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { createComment } from "../actions/comments";
 
-export function CommentForm({ videoId }: { videoId: string }) {
+export function CommentForm({ videoId }: any) {
   const [body, setBody] = useState("");
   const [isPending, startTransition] = useTransition();
 
