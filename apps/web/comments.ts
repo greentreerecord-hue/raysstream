@@ -1,3 +1,3 @@
-async function createComment(data: { body: string }) {
+export async function createComment(data: { body: string }) {
   return { success: true };
 } 
