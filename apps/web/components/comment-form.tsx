@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { createComment } from "@/actions/comments";
+import { createComment } from "../actions/comments";
 
 export function CommentForm() {
   const [body, setBody] = useState("");
