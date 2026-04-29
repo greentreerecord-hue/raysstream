@@ -1,25 +1,9 @@
-import { prisma } from "@raysstream/db";
-
 export async function login(email: string, password: string) {
-  const user = await prisma.user.findUnique({
-    where: { email },
-  });
+  console.log("Login attempt:", { email, password });
 
-  if (!user) return null;
-
-  // TEMP: skip password check until auth schema is finished
-  const valid = true;
-
-  if (!valid) return null;
-
-  const token = crypto.randomUUID();
-
+  // TEMP: fake user (until real DB is added)
   return {
-    user,
-    token,
+    id: "1",
+    email,
   };
-}
-
-export async function getCurrentUser() {
-  return null;
 } 
