@@ -1,13 +1,13 @@
-import { prisma } from "./prisma";
+import { PrismaClient } from "@prisma/client";
 
-export async function login(email: string, password: string) {
-  const user = await prisma.user.findUnique({
-    where: {
-      email,
-    },
+const globalForPrisma = global as unknown as {
+  prisma: PrismaClient;
+};
+
+export const prisma =
+  globalForPrisma.prisma ||
+  new PrismaClient({
+    log: ["query"],
   });
 
-  if (!user) return null;
-
-  return user;
-} 
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma; 
