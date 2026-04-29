@@ -1,41 +1,45 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { createComment } from "@/app/actions/comments";
 
-export function CommentForm({ videoId, slug }: { videoId: string; slug: string }) {
+export default function CommentForm() {
   const [body, setBody] = useState("");
-  const [pending, startTransition] = useTransition();
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState("");
+  const [isPending, startTransition] = useTransition();
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    startTransition(async () => {
+      try {
+        console.log("Comment:", body);
+        setBody("");
+        setError("");
+      } catch {
+        setError("Comment failed.");
+      }
+    });
+  }
 
   return (
-    <div className="mt-8 rounded-3xl border border-white/10 bg-white/5 p-4">
+    <form onSubmit={handleSubmit} className="mt-4 space-y-3">
       <textarea
         value={body}
         onChange={(e) => setBody(e.target.value)}
-        placeholder="Add a comment"
-        className="min-h-28 w-full rounded-2xl border border-white/10 bg-zinc-900 p-3 text-white outline-none"
+        placeholder="Add a comment..."
+        className="w-full rounded-xl border border-white/10 bg-black/40 p-3 text-sm text-white outline-none"
+        rows={3}
       />
-      {error && <p className="mt-2 text-sm text-red-400">{error}</p>}
-      <div className="mt-3 flex justify-end">
-        <button
-          disabled={pending}
-          onClick={() => {
-            setError(null);
-            startTransition(async () => {
-              try {
-                await createComment(videoId, body, slug);
-                setBody("");
-              } catch (e) {
-                setError(e instanceof Error ? e.message : "Failed to post comment");
-              }
-            });
-          }}
-          className="rounded-2xl bg-white px-4 py-2 font-medium text-zinc-950 disabled:opacity-50"
-        >
-          {pending ? "Posting..." : "Post Comment"}
-        </button>
-      </div>
-    </div>
+
+      {error ? <p className="text-sm text-red-400">{error}</p> : null}
+
+      <button
+        type="submit"
+        disabled={isPending || body.trim().length === 0}
+        className="rounded-full bg-red-600 px-5 py-2 text-sm font-semibold text-white disabled:opacity-50"
+      >
+        {isPending ? "Posting..." : "Comment"}
+      </button>
+    </form>
   );
 }
