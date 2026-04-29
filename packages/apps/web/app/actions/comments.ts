@@ -1,7 +1,12 @@
-"use server";
+export async function signIn(email: string, password: string) {
+  console.log("Login attempt:", { email, password });
 
-export async function createComment() {
-  console.log("Comment saved temporarily");
+  return {
+    id: "1",
+    email,
+  };
+}
 
-  return { success: true };
+export async function login(email: string, password: string) {
+  return signIn(email, password);
 } 
