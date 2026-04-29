@@ -1,8 +1,11 @@
-"use server"
+"use server";
 
-export async function createComment({ data }: any) {
-  console.log("Creating comment:", data)
+export async function createComment(formData: FormData) {
+  const body = formData.get("body") as string;
+  const videoId = formData.get("videoId") as string;
 
-  // TEMP fake success (so build passes)
-  return { success: true }
+  console.log("New comment:", { body, videoId });
+
+  // TODO: save to database later
+  return { success: true };
 } 
