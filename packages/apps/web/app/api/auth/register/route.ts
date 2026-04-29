@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
-import { registerUser } from "@/lib/auth";
 
 export async function POST(req: Request) {
-  const { email, password, name, creator } = await req.json();
+  const { email, password } = await req.json();
 
-  try {
-    const user = await registerUser({ email, password, name, creator });
-    return NextResponse.json({ ok: true, user: { id: user.id, email: user.email, name: user.name } });
-  } catch (error) {
-    return NextResponse.json({ error: error instanceof Error ? error.message : "Registration failed" }, { status: 400 });
-  }
-}
+  console.log("Login:", { email, password });
+
+  return NextResponse.json({
+    success: true,
+    user: {
+      id: "1",
+      email,
+    },
+  });
+} 
