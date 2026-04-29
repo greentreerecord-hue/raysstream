@@ -1,49 +1,59 @@
-"use client"
 
-import { useState, useTransition } from "react"
-import { createComment } from "@/actions/create-comment"
+ 
+"use client";
+
+import { useState, useTransition } from "react";
+import { createComment } from "../actions/create-comment";
 
 export default function CommentForm({ videoId }: { videoId: string }) {
-  const [body, setBody] = useState("")
-  const [isPending, startTransition] = useTransition()
+  const [body, setBody] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (!body.trim()) return
+    const formData = new FormData();
+    formData.append("body", body);
+    formData.append("videoId", videoId);
 
     startTransition(async () => {
-      try {
-        await createComment({
-          data: {
-            videoId: videoId,
-            body: body,
-          },
-        })
+      const res = await createComment(formData);
 
-        setBody("")
-      } catch (err) {
-        console.error("Failed to create comment:", err)
+      if (res?.success) {
+        setBody("");
+      } else {
+        alert(res?.error || "Something went wrong");
       }
-    })
-  }
+    });
+  };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2 mt-4">
-      <input
-        type="text"
-        placeholder="Add a comment..."
+    <form onSubmit={handleSubmit} style={{ marginTop: 20 }}>
+      <textarea
         value={body}
         onChange={(e) => setBody(e.target.value)}
-        className="flex-1 border px-3 py-2 rounded"
+        placeholder="Add a comment..."
+        style={{
+          width: "100%",
+          padding: "10px",
+          borderRadius: "8px",
+          border: "1px solid #ccc",
+        }}
       />
+
       <button
         type="submit"
         disabled={isPending}
-        className="bg-blue-500 text-white px-4 py-2 rounded"
+        style={{
+          marginTop: "10px",
+          padding: "8px 16px",
+          borderRadius: "6px",
+          background: "black",
+          color: "white",
+        }}
       >
-        {isPending ? "Posting..." : "Post"}
+        {isPending ? "Posting..." : "Post Comment"}
       </button>
     </form>
-  )
+  );
 } 
