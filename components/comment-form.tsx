@@ -1,48 +1,48 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { createComment } from "@/app/actions/comments";
 
-type Props = {
-  videoId: string;
+type CommentFormProps = {
+  videoId?: string;
 };
 
-export default function CommentForm({ videoId }: Props) {
+export default function CommentForm({ videoId }: CommentFormProps) {
   const [body, setBody] = useState("");
-  const [error, setError] = useState("");
   const [isPending, startTransition] = useTransition();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    if (!body.trim()) return;
 
     startTransition(async () => {
       try {
-        await createComment({
-          videoId: videoId,
-          body: body,
+        console.log("New comment:", {
+          videoId,
+          body,
         });
 
         setBody("");
-      } catch (err) {
-        setError("Failed to post comment");
+      } catch (error) {
+        console.error("Comment failed:", error);
       }
     });
-  };
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="mt-4 space-y-3">
       <textarea
         value={body}
         onChange={(e) => setBody(e.target.value)}
-        placeholder="Write a comment..."
+        placeholder="Add a comment..."
+        className="w-full rounded-xl border border-white/10 bg-black/40 p-3 text-sm text-white outline-none"
+        rows={3}
       />
 
-      {error && <p>{error}</p>}
-
-      <button type="submit" disabled={isPending}>
-        {isPending ? "Posting..." : "Post Comment"}
+      <button
+        type="submit"
+        disabled={isPending || body.trim().length === 0}
+        className="rounded-full bg-red-600 px-5 py-2 text-sm font-semibold text-white disabled:opacity-50"
+      >
+        {isPending ? "Posting..." : "Comment"}
       </button>
     </form>
   );
