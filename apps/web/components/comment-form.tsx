@@ -1,40 +1,29 @@
-
- 
 "use client";
 
 import { useState, useTransition } from "react";
-import { createComment } from "../actions/create-comment";
 
 export default function CommentForm({ videoId }: { videoId: string }) {
   const [body, setBody] = useState("");
   const [isPending, startTransition] = useTransition();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("body", body);
-    formData.append("videoId", videoId);
-
-    startTransition(async () => {
-      const res = await createComment(formData);
-
-      if (res?.success) {
-        setBody("");
-      } else {
-        alert(res?.error || "Something went wrong");
-      }
+    startTransition(() => {
+      console.log("New comment:", { body, videoId });
+      setBody("");
     });
-  };
+  }
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginTop: 20 }}>
+    <form onSubmit={handleSubmit} style={{ marginTop: "20px" }}>
       <textarea
         value={body}
         onChange={(e) => setBody(e.target.value)}
         placeholder="Add a comment..."
         style={{
           width: "100%",
+          minHeight: "90px",
           padding: "10px",
           borderRadius: "8px",
           border: "1px solid #ccc",
@@ -43,13 +32,14 @@ export default function CommentForm({ videoId }: { videoId: string }) {
 
       <button
         type="submit"
-        disabled={isPending}
+        disabled={isPending || body.trim() === ""}
         style={{
           marginTop: "10px",
           padding: "8px 16px",
           borderRadius: "6px",
           background: "black",
           color: "white",
+          border: "none",
         }}
       >
         {isPending ? "Posting..." : "Post Comment"}
