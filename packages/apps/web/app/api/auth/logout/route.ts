@@ -1,7 +1,15 @@
 import { NextResponse } from "next/server";
-import { signOut } from "@/lib/auth";
 
-export async function POST() {
-  await signOut();
-  return NextResponse.json({ ok: true });
-}
+export async function POST(req: Request) {
+  const { email, password } = await req.json();
+
+  console.log("Login:", { email, password });
+
+  return NextResponse.json({
+    success: true,
+    user: {
+      id: "1",
+      email,
+    },
+  });
+} 
