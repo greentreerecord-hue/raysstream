@@ -1,76 +1,31 @@
 export default function Home() {
-  const videos = [
-    { title: "First Video", views: "1M views" },
-    { title: "Second Video", views: "500K views" },
-    { title: "Third Video", views: "250K views" },
-  ];
-
   return (
-    <main style={{
-      minHeight: "100vh",
-      backgroundColor: "#000",
-      color: "#fff",
-      padding: "24px",
-      fontFamily: "Arial"
-    }}>
-     
-      {/* Header */}
-      <h1 style={{ fontSize: "28px", marginBottom: "8px" }}>
-        🔥 Ray’sStream
-      </h1>
+    <main
+      style={{
+        minHeight: "100vh",
+        backgroundColor: "black",
+        color: "white",
+        padding: "20px",
+        fontFamily: "Arial",
+      }}
+    >
+      <h1 style={{ fontSize: "28px" }}>🔥 Ray’sStream</h1>
+      <p>The future of video streaming starts here.</p>
 
-      <p style={{ color: "#aaa", marginBottom: "24px" }}>
-        The future of video streaming starts here.
-      </p>
+      <h2 style={{ marginTop: "20px" }}>🔥 Trending</h2>
 
-      {/* Search */}
-      <input
-        type="text"
-        placeholder="Search videos..."
+      <div
         style={{
-          width: "100%",
-          padding: "12px",
-          borderRadius: "8px",
-          border: "1px solid #333",
-          background: "#111",
-          color: "#fff",
-          marginBottom: "32px"
+          display: "flex",
+          gap: "20px",
+          marginTop: "10px",
         }}
-      />
+      >
+        <div style={{ width: "200px" }}>
+          <div style={{ height: "120px", background: "gray" }}></div>
+          <p>First Video</p>
+        </div>
 
-      {/* Trending */}
-      <h2 style={{ marginBottom: "16px" }}>🔥 Trending</h2>
-
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-        gap: "20px"
-      }}>
-        {videos.map((video, i) => (
-          <div key={i} style={{
-            background: "#111",
-            borderRadius: "12px",
-            overflow: "hidden",
-            cursor: "pointer"
-          }}>
-           
-            <div style={{
-              height: "150px",
-              background: "#333"
-            }} />
-
-            <div style={{ padding: "12px" }}>
-              <h3>{video.title}</h3>
-              <p style={{ color: "#aaa", fontSize: "14px" }}>
-                {video.views}
-              </p>
-            </div>
-
-          </div>
-        ))}
-      </div>
-
-    </main>
-  );
+        <div 
 } 
  
