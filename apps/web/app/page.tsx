@@ -7,11 +7,12 @@ export default function HomePage() {
         color: "white",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
         alignItems: "center",
+        justifyContent: "center",
+        gap: "20px",
       }}
     >
-      <h1>Ray’sStream</h1>
+      <h1>Ray'sStream</h1>
 
       <video
         src="/videos/test.mp4"
@@ -27,13 +28,12 @@ export default function HomePage() {
 
       <button
         style={{
-          marginTop: "20px",
           padding: "12px 24px",
+          fontSize: "18px",
           backgroundColor: "red",
           color: "white",
           border: "none",
           borderRadius: "8px",
-          fontSize: "18px",
           cursor: "pointer",
         }}
       >
@@ -41,4 +41,4 @@ export default function HomePage() {
       </button>
     </main>
   );
-}
+} 
