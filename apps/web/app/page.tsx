@@ -6,9 +6,9 @@ export default function HomePage() {
         backgroundColor: "black",
         color: "white",
         display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        flexDirection: "column",
       }}
     >
       <h1>Ray’sStream</h1>
@@ -18,18 +18,22 @@ export default function HomePage() {
         controls
         autoPlay
         loop
-        style={{ width: "80%", maxWidth: "900px" }}
+        style={{
+          width: "80%",
+          maxWidth: "900px",
+          borderRadius: "12px",
+        }}
       />
 
       <button
         style={{
           marginTop: "20px",
           padding: "12px 24px",
-          fontSize: "18px",
           backgroundColor: "red",
           color: "white",
           border: "none",
-          borderRadius: "10px",
+          borderRadius: "8px",
+          fontSize: "18px",
           cursor: "pointer",
         }}
       >
