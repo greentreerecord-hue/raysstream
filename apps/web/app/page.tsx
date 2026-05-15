@@ -1,40 +1,26 @@
-
 export default function HomePage() {
   return (
     <main
       style={{
         minHeight: "100vh",
-        background: "#0f172a",
-        color: "white",
+        backgroundColor: "black",
         display: "flex",
-        flexDirection: "column",
+        justifyContent: "center",
         alignItems: "center",
-        paddingTop: "60px",
       }}
     >
-      <h1
-        style={{
-          fontSize: "48px",
-          fontWeight: "bold",
-          marginBottom: "40px",
-        }}
-      >
-        Ray’sStream
-      </h1>
-
       <video
+        src="/videos/itscool.mp4"
         controls
         autoPlay
+        loop
         muted
-        playsInline
-        width={900}
         style={{
-          borderRadius: "16px",
-          background: "black",
+          width: "90%",
+          maxWidth: "900px",
+          borderRadius: "12px",
         }}
-      >
-        <source src="/videos/itscool.mp4" type="video/mp4" />
-      </video>
+      />
     </main>
   );
-} 
+}
