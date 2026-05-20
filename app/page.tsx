@@ -5,27 +5,24 @@ export default function Home() {
         minHeight: "100vh",
         backgroundColor: "black",
         color: "white",
-        padding: "20px",
-        fontFamily: "Arial",
+        padding: "24px",
       }}
     >
-      <h1 style={{ fontSize: "28px" }}>🔥 Ray’sStream</h1>
-      <p>The future of video streaming starts here.</p>
+      <h1>Ray&apos;sStream</h1>
 
-      <h2 style={{ marginTop: "20px" }}>🔥 Trending</h2>
-
-      <div
+      <video
+        src="/videos/itscool.mp4"
+        controls
+        autoPlay
+        muted
+        loop
         style={{
-          display: "flex",
-          gap: "20px",
-          marginTop: "10px",
+          width: "100%",
+          maxWidth: "900px",
+          borderRadius: "12px",
+          marginTop: "20px",
         }}
-      >
-        <div style={{ width: "200px" }}>
-          <div style={{ height: "120px", background: "gray" }}></div>
-          <p>First Video</p>
-        </div>
-
-        <div 
-} 
- 
+      />
+    </main>
+  );
+}
